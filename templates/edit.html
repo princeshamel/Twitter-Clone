@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+{% load static %}
+<section class="content">
+    <div class="header">
+        <img src="{% static 'img/techis-logo.png' %}" /> 
+      <h1>Edit</h1>
+    </div>
+    <section class="post_forum">
+      <form
+        action="/edit/{{posts.id}}/"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value="{{posts.name}}"
+          required
+        /><br />
+        <input name="body" value="{{posts.body}}" ></input>
+        <br />
+        <input id="uploadfile" type="file" name="image" />
+        {% if posts.image.url %}
+        <img class="Image" src="{{posts.image.url}}"  style="width: 250px; height: 200px;"/>
+        
+
+        {% endif %} 
+        <br />
+        <div class="tweet">
+          <a href="{% url 'index' %}" id="Cancel" type="submit">Cancel</a>
+          <input id="button" type="submit" value="Update" />
+        </div>
+      </form>
+    </section>
+  </section>
+
+<!-- <section class="content">
+  <div class="header">
+    <img src="{% static 'img/techis-logo.png' %}" /> 
+    <h1>Edit</h1>
+
+
+  </div>
+  <section class="post_forum">
+    <form action="/edit/((posts.id))/" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder=" Your Name" value ="((posts.name))" required><br>
+      <input name="body" placeholder="Whats Happening?" value = "((posts.body))" ></input><br>
+      <input id="uploadfile" name="image" type="file">
+      <input id="button" type ="submit" value="Tweet" />
+    </form>
+  </section> -->
+  {% endblock %}
